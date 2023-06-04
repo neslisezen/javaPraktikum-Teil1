@@ -138,6 +138,16 @@ public class VerketteteListe
 	  }
 	
   }
+  public void ausgabe(){
+	  Knoten neuer_knoten = new Knoten();
+	  neuer_knoten = aktueller_knoten;
+	  erstes_Element();
+	  do{
+		  System.out.println(aktuelles_Element());
+		  naechstes_Element();
+	  }
+	  while (aktuelles_Element()!=neuer_knoten);
+  }
   
   /** Der Nachfolger des aktuellen Elements wird aktuelles Element.
       @return Zeiger auf das neue aktuelle Element.
@@ -171,6 +181,7 @@ public class VerketteteListe
   			return true;
   		}
   }
+
   
   
   /** Ausnahme, wird ausgeloest, wenn versucht wird, Elemente in 
