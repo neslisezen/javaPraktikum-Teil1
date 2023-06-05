@@ -1,4 +1,5 @@
 package praktikumTeil1;
+import java.lang.String;
 
 /** Diese Klasse stellt einfach verkettete Listen (Vorw�rtsverkettung) 
     zur Verfuegung.
@@ -138,12 +139,12 @@ public class VerketteteListe
 	  }
 	
   }
-  public void ausgabe(){
+  public void ausgabeKnoten(){
 	  Knoten neuer_knoten = new Knoten();
 	  neuer_knoten = aktueller_knoten;
 	  erstes_Element();
 	  do{
-		  System.out.println(aktuelles_Element());
+		  System.out.print(aktuelles_Element()+" ");
 		  naechstes_Element();
 	  }
 	  while (aktuelles_Element()!=neuer_knoten);
@@ -180,6 +181,33 @@ public class VerketteteListe
   		catch (ende_Ausnahme e) {
   			return true;
   		}
+  }
+
+
+	public boolean vergleichen(VerketteteListe knotenZumVergleichen){
+
+	  aktuelles_Element();
+	  knotenZumVergleichen.aktuelles_Element();
+
+	  for(int i=1; i<=laenge();i++){
+		  if(aktueller_knoten.element == knotenZumVergleichen.aktueller_knoten.element) {
+			  naechstes_Element();
+			  knotenZumVergleichen.naechstes_Element();
+		  }
+		  else
+			  return false;
+	  }
+		  return false;
+  }
+	
+  public int laenge (){
+	  int i=0;
+	  aktuelles_Element();
+	  while(aktueller_knoten.nachfolger != null){
+		  ++i;
+		  naechstes_Element();
+	  }
+		  return i;
   }
 
   

@@ -1,30 +1,63 @@
 package praktikumTeil1;
+import java.awt.Toolkit;
+import java.util.Random;
+import java.util.Scanner;
 import praktikumTeil1.*;
 
 public class Ziffernreihe {
-	private VerketteteListe zufaelligeZahlen = new VerketteteListe();
-	private VerketteteListe userZahlen = new VerketteteListe();
-	public Ziffernreihe() {
-
+	
+	static VerketteteListe zufaelligeZahlen = new VerketteteListe();
+	static VerketteteListe userZahlen = new VerketteteListe();
+	static Scanner input = new Scanner (System.in);
+	static Random zufallszahlengenerator=new Random();
+	
+	
+	public static boolean main(String[] args) {
+		spielGenerator();
+		userEingabe();
+		boolean returnValue = vergleichen();
+		return returnValue;
 	}
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
+	public static void userEingabe(){
+		
+		int temp=0, spielerEingabe=0;
+
+		do {
+
+			spielerEingabe = input.nextInt();
+			userZahlen.fuege_ein_nach(spielerEingabe);
+			++temp;  		//speichert Zahl der Eingabe
+
+		}
+		while(zufaelligeZahlen.laenge()!=temp);
 	}
 
-	public boolean userEingabe(int userNummer){
+	public static boolean vergleichen(){
 
+		for(int i=0;i<100;i++) System.out.println();
+		System.out.println("****************************************");
+
+		if(zufaelligeZahlen.vergleichen(userZahlen) == true)
+			return true;
+		else {
+			Toolkit.getDefaultToolkit().beep();
+			System.out.println("Laenge der Ziffernfolge ist "+ zufaelligeZahlen.laenge());
+			zufaelligeZahlen.ausgabeKnoten();
+			return false;
+		}
 	}
 
-	public void spielGenerator(){
+	public static void spielGenerator(){
+		
 		int zufallsziffer=zufallszahlengenerator.nextInt(10);
 		zufaelligeZahlen.fuege_ein_nach(zufallsziffer);
 
 		try {
 
-			for(int i=0; i < feld.laenge()-1; i++)
+			while(zufaelligeZahlen.naechstes_Element() != null)
 			{// um altere Ziffern auszugeben
-				zuf.ausgabe(i);
+				zufaelligeZahlen.aktuellesElement();
 				Thread.sleep(2000);
 			}
 			System.out.println(zufallsziffer);
