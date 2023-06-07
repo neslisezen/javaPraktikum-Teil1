@@ -12,11 +12,12 @@ public class Ziffernreihe {
 	static Random zufallszahlengenerator=new Random();
 	
 	
-	public static boolean main(String[] args) {
+	public static void main(String[] args) {
 		spielGenerator();
 		userEingabe();
 		boolean returnValue = vergleichen();
-		return returnValue;
+		System.out.println(returnValue);
+
 	}
 
 	public static void userEingabe(){
