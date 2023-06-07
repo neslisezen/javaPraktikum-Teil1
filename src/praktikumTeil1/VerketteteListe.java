@@ -184,21 +184,21 @@ public class VerketteteListe
   }
 
 
-	public boolean vergleichen(VerketteteListe knotenZumVergleichen){
-
-	  aktuelles_Element();
-	  knotenZumVergleichen.aktuelles_Element();
-
-	  for(int i=1; i<=laenge();i++){
-		  if(aktueller_knoten.element == knotenZumVergleichen.aktueller_knoten.element) {
-			  naechstes_Element();
-			  knotenZumVergleichen.naechstes_Element();
-		  }
-		  else
-			  return false;
-	  }
-		  return false;
-  }
+//	public boolean vergleichen(VerketteteListe knotenZumVergleichen){
+//
+//	  aktuelles_Element();
+//	  knotenZumVergleichen.aktuelles_Element();
+//
+//	  for(int i=1; i<=laenge();i++){
+//		  if(aktueller_knoten.element == knotenZumVergleichen.aktueller_knoten.element) {
+//			  naechstes_Element();
+//			  knotenZumVergleichen.naechstes_Element();
+//		  }
+//		  else
+//			  return false;
+//	  }
+//		  return false;
+//  }
 	
   public int laenge (){
 	  int i=0;

@@ -33,12 +33,12 @@ public class Ziffernreihe {
 		while(zufaelligeZahlen.laenge()!=temp);
 	}
 
-	public static boolean vergleichen(){
+	public static boolean vergleichen1(){
 
 		for(int i=0;i<100;i++) System.out.println();
 		System.out.println("****************************************");
 
-		if(zufaelligeZahlen.vergleichen(userZahlen) == true)
+		if(vergleichen() == true)
 			return true;
 		else {
 			Toolkit.getDefaultToolkit().beep();
@@ -57,7 +57,7 @@ public class Ziffernreihe {
 
 			while(zufaelligeZahlen.naechstes_Element() != null)
 			{// um altere Ziffern auszugeben
-				zufaelligeZahlen.aktuellesElement();
+				zufaelligeZahlen.aktuelles_Element();
 				Thread.sleep(2000);
 			}
 			System.out.println(zufallsziffer);
@@ -68,6 +68,21 @@ public class Ziffernreihe {
 		finally {
 			for(int i=0;i<100;i++) System.out.println();
 		}
+
+	}
+	public static boolean vergleichen() {
+		zufaelligeZahlen.erstes_Element();
+		userZahlen.erstes_Element();
+	
+		  for(int i=1; i<=userZahlen.laenge();i++){
+			  if(zufaelligeZahlen.aktuelles_Element() == userZahlen.aktuelles_Element()) {
+				  zufaelligeZahlen.naechstes_Element();
+				  userZahlen.naechstes_Element();
+			  }
+			  else
+				  return false;
+		  }
+		return false;
 	}
 
 }
