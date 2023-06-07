@@ -244,7 +244,19 @@ public class VerketteteListe
 		  
 	  }
 
-  // Diese eingebettete Klasse stellt Knotenobjekte zur Verf�gung
+	public boolean equals(Object object) {
+		if (this == object) return true;
+		if (object == null || getClass() != object.getClass()) return false;
+		if (!super.equals(object)) return false;
+		VerketteteListe that = (VerketteteListe) object;
+		return aktueller_knoten.equals(that.aktueller_knoten);
+	}
+
+	public int hashCode() {
+		return java.util.Objects.hash(super.hashCode(), aktueller_knoten);
+	}
+
+	// Diese eingebettete Klasse stellt Knotenobjekte zur Verf�gung
   // Knoten sind ausserhalb der Klasse VerketteteListe nicht sichtbar.
   private class Knoten
   { private Object element;

@@ -13,10 +13,10 @@ public class Ziffernreihe {
 	
 	
 	public static void main(String[] args) {
-//		spielGenerator();
-//		userEingabe();
-//		boolean returnValue = vergleichen();
-//		System.out.println(returnValue);
+		spielGenerator();
+		userEingabe();
+		boolean returnValue = vergleichen();
+		System.out.println(returnValue);
 
 	}
 
@@ -76,7 +76,7 @@ public class Ziffernreihe {
 		userZahlen.erstes_Element();
 	
 		  for(int i=1; i<=userZahlen.laenge();i++){
-			  if((int)zufaelligeZahlen.aktuelles_Element() == (int)userZahlen.aktuelles_Element()) {
+			  if(zufaelligeZahlen.aktuelles_Element().equals(userZahlen.aktuelles_Element())) {
 				  zufaelligeZahlen.naechstes_Element();
 				  userZahlen.naechstes_Element();
 			  }
