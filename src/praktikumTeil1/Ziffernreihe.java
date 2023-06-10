@@ -13,33 +13,56 @@ public class Ziffernreihe {
 	
 	
 	public static void main(String[] args) {
+		
+		do {
 		spielGenerator();
 		userEingabe();
-		boolean returnValue = vergleichen();
-		System.out.println(returnValue);
+		vergleichen();
+		}
+		while (vergleichen()==true);
+	}
+	
+	public static void spielGenerator(){
+		
+		int zufallsziffer=zufallszahlengenerator.nextInt(10);
+		zufaelligeZahlen.fuege_ein_nach(zufallsziffer);
+
+		try {
+			zufaelligeZahlen.erstes_Element();
+			for(int i=1; i<=zufaelligeZahlen.laenge(); i++){
+				System.out.print(zufaelligeZahlen.aktuelles_Element()+ " ");
+				Thread.sleep(2000);
+				zufaelligeZahlen.naechstes_Element();
+				
+			}
+				
+		}
+
+		catch (InterruptedException e) {}
+		finally {
+			for(int i=0;i<100;i++) System.out.println();
+		}
 
 	}
-
 	public static void userEingabe(){
 		
-		int temp=0, spielerEingabe=0;
+		int spielerEingabe=0;
 
 		do {
-
-			spielerEingabe = input.nextInt();
-			userZahlen.fuege_ein_nach(spielerEingabe);
-			++temp;  		//speichert Zahl der Eingabe
-
-		}
-		while(zufaelligeZahlen.laenge()!=temp);
+			System.out.println("Geben Sie die Ziffer/n einzel ein: "); //test 
+			for(int i=1; i<=zufaelligeZahlen.laenge(); i++)
+				spielerEingabe = input.nextInt();
+				userZahlen.fuege_ein_nach(spielerEingabe);
+			}
+		while(zufaelligeZahlen.ende_erreicht() != true);
 	}
 
-	public static boolean vergleichen1(){
+	public static boolean vergleichen(){
 
 		for(int i=0;i<100;i++) System.out.println();
 		System.out.println("****************************************");
 
-		if(vergleichen() == true)
+		if(vergleichenKnoten() == true)
 			return true;
 		else {
 			Toolkit.getDefaultToolkit().beep();
@@ -49,41 +72,27 @@ public class Ziffernreihe {
 		}
 	}
 
-	public static void spielGenerator(){
-		
-		int zufallsziffer=zufallszahlengenerator.nextInt(10);
-		zufaelligeZahlen.fuege_ein_nach(zufallsziffer);
 
-		try {
-
-			while(zufaelligeZahlen.naechstes_Element() != null)
-			{// um altere Ziffern auszugeben
-				zufaelligeZahlen.aktuelles_Element();
-				Thread.sleep(2000);
-			}
-			System.out.println(zufallsziffer);
-			Thread.sleep(2000);
-		}
-
-		catch (InterruptedException e) {}
-		finally {
-			for(int i=0;i<100;i++) System.out.println();
-		}
-
-	}
-	public static boolean vergleichen() {
+	private static boolean vergleichenKnoten() {
 		zufaelligeZahlen.erstes_Element();
 		userZahlen.erstes_Element();
-	
-		  for(int i=1; i<=userZahlen.laenge();i++){
-			  if(zufaelligeZahlen.aktuelles_Element().equals(userZahlen.aktuelles_Element())) {
+		int temp = 1, i=1;
+		  for( ; i<=zufaelligeZahlen.laenge() ; i++){
+			  Integer zufaelligeZahl = (Integer) zufaelligeZahlen.aktuelles_Element();
+			  Integer userZahl = (Integer) userZahlen.aktuelles_Element();
+			  if(zufaelligeZahl == userZahl) {
 				  zufaelligeZahlen.naechstes_Element();
 				  userZahlen.naechstes_Element();
+				  temp++;
 			  }
 			  else
 				  return false;
 		  }
-		return false;
+		  if(temp == i) {
+			  return true;
+		  }
+		  else
+			  return false;
 	}
 
 }
