@@ -26,19 +26,24 @@ public class VerketteteListe
   { 
 	Knoten neuer_knoten = new Knoten();
     neuer_knoten.element = element;
-    neuer_knoten.nachfolger = kopf;
-    kopf = neuer_knoten;
+    if(kopf.nachfolger != ende) {
+    	neuer_knoten.nachfolger = kopf;
+    	kopf = neuer_knoten;
+    }
+    else
+    	kopf.element = neuer_knoten.element;
+    
     aktueller_knoten = kopf;
   }
   
-  /** nicht fertig 
+  /** 
       Einfuegen eines neuen Elements nach dem aktuellen Element.
       Das neue Element wird zum aktuellen Element.
       Ist die Liste noch leer, wird das neue Element das erste Element.
       @param element das Element, das in die Liste eingefuegt werden soll.*/    
   public void fuege_ein_nach(Object element)
   {  
-	  if(kopf.element==null) {
+	  if(aktueller_knoten==null) {
 			setze_an_Anfang(element);
 		  }
 	  else {
@@ -48,9 +53,6 @@ public class VerketteteListe
 		  neuer_Knoten.nachfolger = aktueller_knoten.nachfolger;
 		  aktueller_knoten.nachfolger= neuer_Knoten;
 		  aktueller_knoten = neuer_Knoten;
-		  if(neuer_Knoten.nachfolger.element == null) {
-			  ende = neuer_Knoten;
-		  }
 		  
 	  }
   }
@@ -63,11 +65,14 @@ public class VerketteteListe
 	  try
 	  { 
 	  istListeLeer();
-	  Knoten temp_Knoten = new Knoten();
-	  temp_Knoten = kopf;	  
-	  kopf = temp_Knoten.nachfolger;
-	  aktueller_knoten = kopf;
-	  return temp_Knoten.element;
+	  
+	  Knoten geloeschter_Knoten = new Knoten();
+	  geloeschter_Knoten = kopf;	  
+	  kopf = geloeschter_Knoten.nachfolger;
+	  aktueller_knoten = geloeschter_Knoten.nachfolger;
+	  //es wird am Ende sein, wenn das Element letztes Element ist.
+	  return geloeschter_Knoten.element;
+	  
 	  }
 	  catch (leer_Ausnahme e) {
 		  e.printStackTrace();
@@ -87,13 +92,13 @@ public class VerketteteListe
   		  { 
   		  istListeLeer();
   		  istEsLetztesElement();
-  		  Knoten temp_Knoten = new Knoten();
-  		  temp_Knoten = aktueller_knoten.nachfolger;
-  		  aktueller_knoten.nachfolger = temp_Knoten.nachfolger;
-  		  if(temp_Knoten == ende) {
-  			ende = aktueller_knoten;
-		  }
-  		  return temp_Knoten.element;
+  		  Knoten geloeschter_Knoten = new Knoten();
+  		  
+  		  geloeschter_Knoten = aktueller_knoten.nachfolger;
+  		  
+  		  aktueller_knoten.nachfolger = geloeschter_Knoten.nachfolger;
+  		  
+  		  return geloeschter_Knoten.element;
   		  }
   		  catch (leer_Ausnahme e) {
   			  e.printStackTrace();
@@ -143,11 +148,11 @@ public class VerketteteListe
 	  Knoten neuer_knoten = new Knoten();
 	  neuer_knoten = aktueller_knoten;
 	  erstes_Element();
-	  do{
+	  for(int i=1; i<=laenge() ; i++) {
 		  System.out.print(aktuelles_Element()+" ");
 		  naechstes_Element();
 	  }
-	  while (aktuelles_Element()!=neuer_knoten);
+	 
   }
   
   /** Der Nachfolger des aktuellen Elements wird aktuelles Element.
@@ -182,31 +187,16 @@ public class VerketteteListe
   			return true;
   		}
   }
-
-
-//	public boolean vergleichen(VerketteteListe knotenZumVergleichen){
-//
-//	  aktuelles_Element();
-//	  knotenZumVergleichen.aktuelles_Element();
-//
-//	  for(int i=1; i<=laenge();i++){
-//		  if(aktueller_knoten.element == knotenZumVergleichen.aktueller_knoten.element) {
-//			  naechstes_Element();
-//			  knotenZumVergleichen.naechstes_Element();
-//		  }
-//		  else
-//			  return false;
-//	  }
-//		  return false;
-//  }
 	
   public int laenge (){
-	  int i=0;
-	  aktuelles_Element();
-	  while(aktueller_knoten.nachfolger != null){
+	  int i=1;
+	  var Temp = aktueller_knoten;
+	  erstes_Element();
+	  while(kopf.nachfolger != ende && aktueller_knoten.nachfolger != ende){
 		  ++i;
 		  naechstes_Element();
 	  }
+	  aktueller_knoten =Temp;
 		  return i;
   }
 
@@ -233,19 +223,19 @@ public class VerketteteListe
   
   private void istListeLeer() throws leer_Ausnahme {
 	  
-	if(kopf.element == null) 
+	if(kopf.element == null || aktueller_knoten == ende) 
 		throw new leer_Ausnahme("Die Liste ist leer.");
   }
   
   private void istEsLetztesElement() throws ende_Ausnahme {
 	  
-		if(aktueller_knoten == ende) 
+		if( aktueller_knoten.nachfolger==ende || kopf.nachfolger == ende) 
 			throw new ende_Ausnahme("Das aktuelle Element ist das letzte Element der Liste!!!");
 		  
 	  }
 
 	public boolean equals(Object object) {
-		if (this == object) return true;
+		if ((int)this.aktuelles_Element() == (int)object) return true;
 		if (object == null || getClass() != object.getClass()) return false;
 		if (!super.equals(object)) return false;
 		VerketteteListe that = (VerketteteListe) object;
