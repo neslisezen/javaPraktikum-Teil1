@@ -1,12 +1,14 @@
 package praktikumTeil1;
-
 public class Ergebnisliste {
-	private String spielerName;
-	private long spielzeit;
-	private int ziffernLange;
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+//Neslihan Sezen 556493	
+	
+	public void setzeErgebnis(Ergebnis ergebnis) {
+		Datenspeicher.ergebnisListe.setze_an_Anfang(ergebnis);
 	}
+	
+	public void ausgabeErgebnis() {
+		Datenspeicher.ergebnisListe.ausgabeKnoten();
+	}
+	
 
 }

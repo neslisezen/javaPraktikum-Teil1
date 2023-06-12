@@ -1,5 +1,6 @@
 package praktikumTeil1;
 import java.lang.String;
+//Neslihan Sezen 556493
 
 /** Diese Klasse stellt einfach verkettete Listen (Vorw�rtsverkettung) 
     zur Verfuegung.
@@ -54,6 +55,25 @@ public class VerketteteListe
 		  aktueller_knoten.nachfolger= neuer_Knoten;
 		  aktueller_knoten = neuer_Knoten;
 		  
+	  }
+  }
+  public void setze_am_Ende(Object element) {
+	  if(aktueller_knoten==null) {
+			setze_an_Anfang(element);
+		  }
+	  else {
+		  Knoten neuer_Knoten = new Knoten();
+		  neuer_Knoten.element = element;
+		  erstes_Element();
+		  if(aktueller_knoten.nachfolger!=ende) {
+			  naechstes_Element();
+		  }
+		  else {
+			  aktueller_knoten.nachfolger = neuer_Knoten;
+			  neuer_Knoten.nachfolger = ende;
+			  aktueller_knoten = neuer_Knoten;
+		  }
+			  
 	  }
   }
   
@@ -147,12 +167,21 @@ public class VerketteteListe
   public void ausgabeKnoten(){
 	  Knoten neuer_knoten = new Knoten();
 	  neuer_knoten = aktueller_knoten;
-	  erstes_Element();
-	  for(int i=1; i<=laenge() ; i++) {
-		  System.out.print(aktuelles_Element()+" ");
-		  naechstes_Element();
+	  Object erster_knoten = erstes_Element();
+	  if(erstes_Element() instanceof Integer) {
+		  for(int i=1; i<=laenge() ; i++) {
+			  System.out.print(aktuelles_Element()+" ");
+			  naechstes_Element();
+		  }
 	  }
-	 
+	  else {
+		  if( erster_knoten instanceof Ergebnis) {
+		  for(int i=1; i<=laenge() ; i++) {
+			  Ergebnis ergebnis = (Ergebnis)aktuelles_Element();
+			  System.out.println(ergebnis.toString());
+			  naechstes_Element();
+		  }
+	  }}
   }
   
   /** Der Nachfolger des aktuellen Elements wird aktuelles Element.
@@ -246,11 +275,12 @@ public class VerketteteListe
 		return java.util.Objects.hash(super.hashCode(), aktueller_knoten);
 	}
 
-	// Diese eingebettete Klasse stellt Knotenobjekte zur Verf�gung
+
+// Diese eingebettete Klasse stellt Knotenobjekte zur Verf�gung
   // Knoten sind ausserhalb der Klasse VerketteteListe nicht sichtbar.
   private class Knoten
   { private Object element;
     private Knoten nachfolger;
-  };
+  }
 
 }

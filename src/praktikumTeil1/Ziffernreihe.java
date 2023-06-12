@@ -3,6 +3,7 @@ import java.awt.Toolkit;
 import java.util.Random;
 import java.util.Scanner;
 import praktikumTeil1.*;
+//Neslihan Sezen 556493
 
 public class Ziffernreihe {
 	
@@ -11,18 +12,7 @@ public class Ziffernreihe {
 	static Scanner input = new Scanner (System.in);
 	static Random zufallszahlengenerator=new Random();
 	
-	
-	public static void main(String[] args) {
-		
-		do {
-		spielGenerator();
-		userEingabe();
-		vergleichen();
-		}
-		while (vergleichen()==true);
-	}
-	
-	public static void spielGenerator(){
+	public void spielGenerator(){
 		
 		int zufallsziffer=zufallszahlengenerator.nextInt(10);
 		zufaelligeZahlen.fuege_ein_nach(zufallsziffer);
@@ -44,7 +34,7 @@ public class Ziffernreihe {
 		}
 
 	}
-	public static void userEingabe(){
+	public void userEingabe(){
 		
 		int spielerEingabe=0;
 
@@ -57,23 +47,21 @@ public class Ziffernreihe {
 		while(zufaelligeZahlen.ende_erreicht() != true);
 	}
 
-	public static boolean vergleichen(){
-
-		for(int i=0;i<100;i++) System.out.println();
-		System.out.println("****************************************");
-
+	public boolean vergleichen(){
+		
 		if(vergleichenKnoten() == true)
 			return true;
 		else {
 			Toolkit.getDefaultToolkit().beep();
-			System.out.println("Laenge der Ziffernfolge ist "+ zufaelligeZahlen.laenge());
+			int ziffernLange = zufaelligeZahlen.laenge();
+			System.out.println("Laenge der Ziffernfolge ist "+ ziffernLange);
 			zufaelligeZahlen.ausgabeKnoten();
 			return false;
 		}
 	}
 
 
-	private static boolean vergleichenKnoten() {
+	private boolean vergleichenKnoten() {
 		zufaelligeZahlen.erstes_Element();
 		userZahlen.erstes_Element();
 		int temp = 1, i=1;
@@ -94,5 +82,9 @@ public class Ziffernreihe {
 		  else
 			  return false;
 	}
-
-}
+	
+	public int laenge (){
+		return zufaelligeZahlen.laenge();
+	}
+	
+    }
